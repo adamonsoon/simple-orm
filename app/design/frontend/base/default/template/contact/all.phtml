@@ -1,0 +1,106 @@
+<?php
+
+$_contacts = $this->getContactCollection();
+?>
+
+<h1><?php echo $this->__('My Contact List') ?></h1>
+<div class="contacts">
+	<div class="contact-columns">
+		<span class="column-id"><?php echo $this->__('ID') ?></span>	
+		<span class="column-name"><?php echo $this->__('Name') ?></span>	
+	</div>
+	<div class="contact-container">
+		<?php foreach ($_contacts as $_contact): ?>
+			<div class="contact">
+				<span class="contact-id">
+					<span class="contact-value"><?php echo $_contact['id'] ?></span>
+				</span>
+				<span class="contact-name">
+					<span class="contact-value"><a title="<?php echo $_contact['email'] ?>" href="<?php echo $this->getEntryUrl($_contact['id']) ?>"><?php echo $_contact['name'] ?></a></span>
+				</span>
+			</div>
+		<?php endforeach; ?>
+	</div>
+
+	<div class="contact-buttons">
+		<button class="contact-add"><?php echo $this->__('Add New Contact') ?></button>
+	</div>
+
+	<form id="contact-add-form" class="contact-add-fields">
+		<div class="contact-add-field">
+			<label for="name"><?php echo $this->__('Name') ?></label>
+			<input class="required-entry new-contact-name" name="name" type="text">
+		</div>
+		<div class="contact-add-field">
+			<label for="email"><?php echo $this->__('Email') ?></label>
+			<input class="required-entry validate-email new-contact-email" name="email" type="text">
+		</div>
+		<input type="submit" class="contact-add-submit" value="<?php echo $this->__('Add') ?>">
+	</form>
+</div>
+
+<script type="text/javascript">
+	'use strict';
+
+	var btnAdd 		 = document.querySelector('.contact-add'),
+		addFields 	 = document.querySelector('.contact-add-fields'),
+		btnAddSubmit = document.querySelector('.contact-add-submit'),
+		contactCont  = document.querySelector('.contact-container'),
+		request 	 = new XMLHttpRequest(),
+		customForm 	 = new VarienForm('contact-add-form'),
+		res 		 = {},
+		entry 		 = `
+<div class="contact hide">
+	<span class="contact-id">
+		<span class="contact-value">{{id}}</span>
+	</span>
+	<span class="contact-name">
+		<span class="contact-value"><a title="{{email}}" href="{{entry_url}}">{{name}}</a></span>
+	</span>
+</div>`;
+
+	request.onreadystatechange = function() {
+
+		var newEntry,
+			hiddenNew,
+			html = contactCont.innerHTML;
+
+		if(request.readyState === 4) {
+			if(request.status === 200) {
+				res = JSON.parse(request.responseText);
+
+				if (res.error === 1) {
+					alert(res.errorMsg);
+				} else {
+					newEntry = entry.replace('{{id}}', res.data.id)
+									.replace('{{email}}', res.data.email)
+									.replace('{{name}}', res.data.name)
+									.replace('{{entry_url}}', res.data.entry_url)
+									.trim();
+
+					contactCont.innerHTML = html + newEntry;
+
+					hiddenNew = document.querySelector('.contact.hide');
+					hiddenNew.classList.remove('hide');
+				}
+			} else {
+				alert('<?php echo $this->__('Error occured when trying to add new contact') ?>');
+			} 
+		}
+	}
+
+	btnAdd.addEventListener('click', function() {
+		addFields.classList.add('show');
+	});
+
+	addFields.addEventListener('submit', function(e) {
+		e.preventDefault();
+
+		if (document.querySelectorAll('.validation-failed').length !== 0) {
+			return;
+		}
+
+		request.open('POST', '<?php echo Mage::getUrl('contact/list/add') ?>');
+		request.send(new FormData(addFields));
+	});
+</script>

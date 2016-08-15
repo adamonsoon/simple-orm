@@ -1,0 +1,6 @@
+app/code/local/Adamr/Contact/ 						app/code/local/Adamr/Contact/
+app/etc/modules/Adamr_Contact.xml 					app/etc/modules/Adamr_Contact.xml
+app/design/frontend/base/default/template/contact/ 	app/design/frontend/base/default/template/contact/
+app/design/frontend/base/default/layout/contact.xml app/design/frontend/base/default/layout/contact.xml
+skin/frontend/base/default/css/contact/				skin/frontend/base/default/css/contact/
+skin/frontend/base/default/js/contact/				skin/frontend/base/default/js/contact/

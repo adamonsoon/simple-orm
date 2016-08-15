@@ -1,0 +1,21 @@
+<?php
+
+$entry = $this->getCurrent();
+
+?>
+
+<div class="contact-entry">
+	<?php if ($entry): ?>
+		<h1><?php echo $entry['name'] ?></h1>
+		<div class="contact-email">
+			<a href="mailto:<?php echo $entry['email'] ?>"><?php echo $entry['email'] ?></a>
+		</div>
+
+		<form class="contact-buttons" action="<?php echo Mage::getUrl('contact/list/delete', array('id' => $entry['id'])) ?>">
+			<input type="submit" class="contact-add" value="<?php echo $this->__('Delete') ?>">
+		</form>
+		
+	<?php else: ?>
+		<div><?php echo $this->__('Entry not found.'); ?></div>
+	<?php endif; ?>
+</div>

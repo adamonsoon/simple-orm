@@ -1,0 +1,54 @@
+.contact-list-all .contact-columns,
+.contact-list-entry .contact-columns {
+  display: flex;
+  font-weight: bold;
+}
+.contact-list-all .contact-columns .column-id,
+.contact-list-entry .contact-columns .column-id {
+  width: 30px;
+}
+.contact-list-all .contact,
+.contact-list-entry .contact {
+  display: flex;
+  transition: 500ms;
+}
+.contact-list-all .contact .contact-id,
+.contact-list-entry .contact .contact-id {
+  width: 30px;
+}
+.contact-list-all .contact-buttons,
+.contact-list-entry .contact-buttons {
+  margin-top: 20px;
+}
+.contact-list-all .contact-buttons .contact-add,
+.contact-list-entry .contact-buttons .contact-add {
+  width: 150px;
+  height: 40px;
+  line-height: 40px;
+}
+.contact-list-all .contact-add-fields,
+.contact-list-entry .contact-add-fields,
+.contact-list-all .contact-edit-fields,
+.contact-list-entry .contact-edit-fields {
+  opacity: 0;
+  margin-top: 20px;
+  transition: 400ms;
+}
+.contact-list-all .contact-add-field label,
+.contact-list-entry .contact-add-field label,
+.contact-list-all .contact-edit-field label,
+.contact-list-entry .contact-edit-field label {
+  width: 70px;
+  margin-top: 10px;
+}
+.contact-list-all .show,
+.contact-list-entry .show {
+  display: block;
+  opacity: 1;
+  transition: 400ms;
+}
+.contact-list-all .hide,
+.contact-list-entry .hide {
+  opacity: 0;
+  transition: 500ms;
+}

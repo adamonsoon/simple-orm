@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<contact_list_all>
+		<reference name="root">
+			<action method="setTemplate"><template>page/1column.phtml</template></action>
+		</reference>
+		<reference name="head">
+			<action method="addItem"><type>skin_js</type><name>js/contact/script.js</name></action>
+			<action method="addCss"><stylesheet>css/contact/style.css</stylesheet></action>
+		</reference>
+		<reference name="content">
+			<block type="contact/list" name="contact_all" template="contact/all.phtml"/>
+		</reference>
+	</contact_list_all>
+
+	<contact_list_entry>
+		<reference name="root">
+			<action method="setTemplate"><template>page/1column.phtml</template></action>
+		</reference>
+		<reference name="head">
+			<action method="addItem"><type>skin_js</type><name>js/contact/script.js</name></action>
+			<action method="addCss"><stylesheet>css/contact/style.css</stylesheet></action>
+		</reference>
+		<reference name="content">
+			<block type="contact/contact" name="contact_entry" template="contact/entry.phtml"/>
+		</reference>
+	</contact_list_entry>
+</layout>   
+	
